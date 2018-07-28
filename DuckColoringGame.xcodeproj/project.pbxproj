@@ -262,7 +262,7 @@
 		0BAF650C20A183E8008B7EB5 /* reminder_flower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BAF64FA20A183E7008B7EB5 /* reminder_flower.mp3 */; };
 		0BAF650D20A183E8008B7EB5 /* reminder_butter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BAF64FB20A183E7008B7EB5 /* reminder_butter.mp3 */; };
 		0BAF650E20A183E8008B7EB5 /* reminder_orange.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BAF64FC20A183E8008B7EB5 /* reminder_orange.mp3 */; };
-		0BAF650F20A183E8008B7EB5 /* reminder_balloon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BAF64FD20A183E8008B7EB5 /* reminder_balloon.mp3 */; };
+		0BAF650F20A183E8008B7EB5 /* reminder_balloon_monster.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BAF64FD20A183E8008B7EB5 /* reminder_balloon_monster.mp3 */; };
 		0BBE9840204D3A890064C98E /* Sound_Biting.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0BBE983F204D3A890064C98E /* Sound_Biting.mp3 */; };
 		0BCA0A99201BCC2100488E8E /* LampScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCA0A8E201BCC2100488E8E /* LampScene.swift */; };
 		0BCA0A9A201BCC2100488E8E /* LampScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0BCA0A8F201BCC2100488E8E /* LampScene.sks */; };
@@ -539,7 +539,7 @@
 		0BAF64FA20A183E7008B7EB5 /* reminder_flower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reminder_flower.mp3; sourceTree = "<group>"; };
 		0BAF64FB20A183E7008B7EB5 /* reminder_butter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reminder_butter.mp3; sourceTree = "<group>"; };
 		0BAF64FC20A183E8008B7EB5 /* reminder_orange.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reminder_orange.mp3; sourceTree = "<group>"; };
-		0BAF64FD20A183E8008B7EB5 /* reminder_balloon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reminder_balloon.mp3; sourceTree = "<group>"; };
+		0BAF64FD20A183E8008B7EB5 /* reminder_balloon_monster.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reminder_balloon_monster.mp3; sourceTree = "<group>"; };
 		0BBE983F204D3A890064C98E /* Sound_Biting.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sound_Biting.mp3; sourceTree = "<group>"; };
 		0BCA0A8E201BCC2100488E8E /* LampScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampScene.swift; sourceTree = "<group>"; };
 		0BCA0A8F201BCC2100488E8E /* LampScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LampScene.sks; sourceTree = "<group>"; };
@@ -1539,7 +1539,7 @@
 				0B8BA80D20CD19520091CBAB /* reminder_penny.mp3 */,
 				0B8BA80B20CD19520091CBAB /* reminder_tomato.mp3 */,
 				0BAF64F720A183E7008B7EB5 /* reminder_apple.mp3 */,
-				0BAF64FD20A183E8008B7EB5 /* reminder_balloon.mp3 */,
+				0BAF64FD20A183E8008B7EB5 /* reminder_balloon_monster.mp3 */,
 				0BAF64FB20A183E7008B7EB5 /* reminder_butter.mp3 */,
 				0BAF64EC20A183E6008B7EB5 /* reminder_cake_monster.mp3 */,
 				0BAF64F620A183E7008B7EB5 /* reminder_candy.mp3 */,
@@ -1793,7 +1793,7 @@
 				0B349A5720D43FEF006B8C5A /* Swing effect.mp3 in Resources */,
 				068ED923205595030054ED9B /* ScoreScene2.sks in Resources */,
 				0613CCC72050467C00FEC3F4 /* instructions_shoes.mp3 in Resources */,
-				0BAF650F20A183E8008B7EB5 /* reminder_balloon.mp3 in Resources */,
+				0BAF650F20A183E8008B7EB5 /* reminder_balloon_monster.mp3 in Resources */,
 				0BCA0AAA201BCE0000488E8E /* Monster_T3.sks in Resources */,
 				0613CCE52050553B00FEC3F4 /* introSong.wav in Resources */,
 				0B3EFED72046336600F5932F /* instructions_piano4.wav in Resources */,
