@@ -1266,22 +1266,22 @@
 			path = AppleScene;
 			sourceTree = "<group>";
 		};
-		0B279EBE20563D5B00ABAA57 /* ButterScene */ = {
+		0B279EBE20563D5B00ABAA57 /* CheeseScene */ = {
 			isa = PBXGroup;
 			children = (
 				0B279EBA205620E700ABAA57 /* ButterScene.swift */,
 				0B279EBC205620FB00ABAA57 /* ButterScene.sks */,
 			);
-			path = ButterScene;
+			path = CheeseScene;
 			sourceTree = "<group>";
 		};
-		0B279EBF20564BBC00ABAA57 /* DiaperScene */ = {
+		0B279EBF20564BBC00ABAA57 /* PennyScene */ = {
 			isa = PBXGroup;
 			children = (
 				0B279ECB20564CFC00ABAA57 /* DiaperScene.swift */,
 				0B279ED320564D8000ABAA57 /* DiaperScene.sks */,
 			);
-			path = DiaperScene;
+			path = PennyScene;
 			sourceTree = "<group>";
 		};
 		0B279EC020564BCB00ABAA57 /* MoonScene_Monster */ = {
@@ -1293,13 +1293,13 @@
 			path = MoonScene_Monster;
 			sourceTree = "<group>";
 		};
-		0B279EC120564BD700ABAA57 /* DishScene */ = {
+		0B279EC120564BD700ABAA57 /* CarScene */ = {
 			isa = PBXGroup;
 			children = (
 				0B279ECF20564D3500ABAA57 /* DishScene.swift */,
 				0B279ED720564DBA00ABAA57 /* DishScene.sks */,
 			);
-			path = DishScene;
+			path = CarScene;
 			sourceTree = "<group>";
 		};
 		0B279EC220564BDF00ABAA57 /* ClockScene */ = {
@@ -1420,10 +1420,10 @@
 				0B279EA9205509A800ABAA57 /* ChairScene */,
 				0B279EB020551D6700ABAA57 /* PhoneScene */,
 				0B279EB320560CBE00ABAA57 /* AppleScene */,
-				0B279EBE20563D5B00ABAA57 /* ButterScene */,
-				0B279EBF20564BBC00ABAA57 /* DiaperScene */,
+				0B279EBE20563D5B00ABAA57 /* CheeseScene */,
+				0B279EBF20564BBC00ABAA57 /* PennyScene */,
 				0B279EC020564BCB00ABAA57 /* MoonScene_Monster */,
-				0B279EC120564BD700ABAA57 /* DishScene */,
+				0B279EC120564BD700ABAA57 /* CarScene */,
 				0B279EC220564BDF00ABAA57 /* ClockScene */,
 			);
 			path = MonsterGame;

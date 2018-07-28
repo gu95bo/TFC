@@ -19,6 +19,10 @@ class ClockScene: SKScene {
     private var foodNode3:SKNode?
     private var foodNode4:SKNode?
     private var monsterNode:SKNode?
+    private var node1Position:CGPoint?
+    private var node2Position:CGPoint?
+    private var node3Position:CGPoint?
+    private var node4Position:CGPoint?
     
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
@@ -37,6 +41,10 @@ class ClockScene: SKScene {
         foodNode3 = self.childNode(withName: "clock")
         foodNode4 = self.childNode(withName: "coffee")
         monsterNode = self.childNode(withName: "Monster")
+        node1Position = foodNode1?.position
+        node2Position = foodNode2?.position
+        node3Position = foodNode3?.position
+        node4Position = foodNode4?.position
         playInstructionsWithName(audioName: "instructions_clock")
         
     }
@@ -141,6 +149,13 @@ class ClockScene: SKScene {
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         clock_incorrectTouches += 1
+                        if selectedNode == foodNode1{
+                            foodNode2?.position = node2Position!
+                        }else if selectedNode == foodNode2{
+                            foodNode3?.position = node3Position!
+                        }else{
+                            foodNode4?.position = node4Position!
+                        }
                         if clock_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "StartScene")

@@ -36,10 +36,10 @@ class DiaperScene: SKScene {
     private var sceneOver = false
     
     override func didMove(to view: SKView) {
-        foodNode1 = self.childNode(withName: "diaper")
+        foodNode1 = self.childNode(withName: "bib")
         foodNode2 = self.childNode(withName: "hair")
         foodNode3 = self.childNode(withName: "penny")
-        foodNode4 = self.childNode(withName: "bat")
+        foodNode4 = self.childNode(withName: "rooster")
         node1Position = foodNode1?.position
         node2Position = foodNode2?.position
         node3Position = foodNode3?.position
@@ -112,7 +112,7 @@ class DiaperScene: SKScene {
         if (instructionsComplete == true) && (feedbackComplete == true) && (sceneOver == false){
             let touch = touches.first!
             let touchLocation = touch.location(in: self)
-            if (self.atPoint(touchLocation).name == "diaper"){
+            if (self.atPoint(touchLocation).name == "bib"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
             } else if (self.atPoint(touchLocation).name == "hair"){
@@ -121,7 +121,7 @@ class DiaperScene: SKScene {
             }else if (self.atPoint(touchLocation).name == "penny"){
                 selectedNode = foodNode3
                 nodeIsSelected = true
-            }else if (self.atPoint(touchLocation).name == "bat"){
+            }else if (self.atPoint(touchLocation).name == "rooster"){
                 selectedNode = foodNode4
                 nodeIsSelected = true
             }else{
@@ -159,7 +159,7 @@ class DiaperScene: SKScene {
                         if selectedNode == foodNode1{
                             foodNode1?.position = node1Position!
                         }else if selectedNode == foodNode2{
-                            foodNode2?.position = node3Position!
+                            foodNode2?.position = node2Position!
                         }else{
                             foodNode4?.position = node4Position!
                         }

@@ -19,6 +19,10 @@ class TomatoScene: SKScene {
     private var foodNode3:SKNode?
     private var monsterNode:SKNode?
     
+    private var node1Position:CGPoint?
+    private var node2Position:CGPoint?
+    private var node3Position:CGPoint?
+    
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
@@ -35,6 +39,9 @@ class TomatoScene: SKScene {
         foodNode2 = self.childNode(withName: "broccoli")
         foodNode3 = self.childNode(withName: "egg")
         monsterNode = self.childNode(withName: "Monster")
+        node1Position = foodNode1?.position
+        node2Position = foodNode2?.position
+        node3Position = foodNode3?.position
         playInstructionsWithName(audioName: "instructions_tomato")
     }
     
@@ -141,6 +148,11 @@ class TomatoScene: SKScene {
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
+                        if selectedNode == foodNode2{
+                            foodNode2?.position = node1Position!
+                        }else{
+                            foodNode3?.position = node3Position!
+                        }
                         tomato_incorrectTouches += 1
                         if tomato_incorrectTouches > 15{
                             sceneOver = true

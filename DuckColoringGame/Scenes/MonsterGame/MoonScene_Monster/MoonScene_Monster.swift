@@ -159,7 +159,7 @@ class MoonScene_Monster: SKScene {
                         if selectedNode == foodNode1{
                             foodNode1?.position = node1Position!
                         }else if selectedNode == foodNode2{
-                            foodNode2?.position = node3Position!
+                            foodNode2?.position = node2Position!
                         }else{
                             foodNode4?.position = node4Position!
                         }

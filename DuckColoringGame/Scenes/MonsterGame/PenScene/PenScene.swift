@@ -140,7 +140,7 @@ class PenScene: SKScene {
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
-                        foodNode2?.position = node2Position!
+                        foodNode1?.position = node1Position!
                         pen_incorrectTouches += 1
                         if pen_incorrectTouches > 15{
                             sceneOver = true

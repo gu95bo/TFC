@@ -36,7 +36,7 @@ class DishScene: SKScene {
     private var sceneOver = false
     
     override func didMove(to view: SKView) {
-        foodNode1 = self.childNode(withName: "dish")
+        foodNode1 = self.childNode(withName: "car")
         foodNode2 = self.childNode(withName: "swing")
         foodNode3 = self.childNode(withName: "crib")
         foodNode4 = self.childNode(withName: "motorcycle")
@@ -112,7 +112,7 @@ class DishScene: SKScene {
         if (instructionsComplete == true) && (feedbackComplete == true) && (sceneOver == false){
             let touch = touches.first!
             let touchLocation = touch.location(in: self)
-            if (self.atPoint(touchLocation).name == "dish"){
+            if (self.atPoint(touchLocation).name == "car"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
             } else if (self.atPoint(touchLocation).name == "swing"){
@@ -147,7 +147,7 @@ class DishScene: SKScene {
             
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
-                    if (selectedNode?.name == "dish"){
+                    if (selectedNode?.name == "car"){
                         dish_correctTouches += 1
                         selectedNode?.removeFromParent()
                         sceneOver = true
@@ -157,7 +157,7 @@ class DishScene: SKScene {
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
                         if selectedNode == foodNode2{
-                            foodNode1?.position = node2Position!
+                            foodNode2?.position = node2Position!
                         }else if selectedNode == foodNode3{
                             foodNode3?.position = node3Position!
                         }else{
