@@ -59,12 +59,12 @@ class RockScene: SKScene {
                 // ... and start timer over...
                 timerCount = 1
             }
-            // if timer seconds are divisable by 10 and totalTimerCount is less than one minute...
-            if (timerCount % 10 == 0) && totalTimerCount <= 58  {
+            // if timer seconds are divisable by 20 and totalTimerCount is less than one minute...
+            if (timerCount % 20 == 0) && totalTimerCount <= 58  {
                 // ... play the reminder.
                 self.run(reminderIfIdle)
             }
-            // if idleReminer has played 6 times in a row, move on to next scene
+            // if idleReminer has played 3 times in a row, move on to next scene
             if totalTimerCount > 59 {
                 self.sceneOver = true
             
@@ -110,7 +110,7 @@ class RockScene: SKScene {
                     comboNumFTDict["twoItemSimple"] = comboNumFTDict["twoItemSimple"]! + 1
                 }
                 
-                animateNode(node: rock!, coloredImg: "rockScene_rock_colored", correctSound: "correct2")
+                animateNode(node: rock!, coloredImg: "ballcolored", correctSound: "correct2")
                 
                 transitionScene (currentScene: self, sceneString: "LampScene", waitTime: 2.5, fadeTime: 1)
             }
@@ -125,11 +125,11 @@ class RockScene: SKScene {
             }
             
             // play reminder instructions if user has touched screen 3 times incorrectly (don't play for 15th touch - just move on)
-            if (rock_incorrectTouches % 3 == 0) && rock_correctTouches < 1 && rock_incorrectTouches < 14 {
-                reminderComplete = false
-                let rock_reminder = SKAction.playSoundFileNamed("reminder_rock", waitForCompletion: true)
-                run(rock_reminder, completion: { self.reminderComplete = true} )
-            }
+//            if (rock_incorrectTouches % 3 == 0) && rock_correctTouches < 1 && rock_incorrectTouches < 14 {
+//                reminderComplete = false
+//                let rock_reminder = SKAction.playSoundFileNamed("reminder_rock", waitForCompletion: true)
+//                run(rock_reminder, completion: { self.reminderComplete = true} )
+//            }
         }
         // update totalTouches variable for idle reminder
         totalTouches = rock_correctTouches + rock_incorrectTouches

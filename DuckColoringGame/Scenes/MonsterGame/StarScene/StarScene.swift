@@ -10,11 +10,17 @@ import SpriteKit
 import GameplayKit
 
 class StarScene: SKScene {
+    //Timer Variables
+    var gameTimer: Timer!
+    var gameCounter = 0
     
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var foodNode3:SKNode?
     private var monsterNode:SKNode?
+    private var node1Position:CGPoint?
+    private var node2Position:CGPoint?
+    private var node3Position:CGPoint?
     
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
@@ -32,16 +38,34 @@ class StarScene: SKScene {
         foodNode2 = self.childNode(withName: "shorts")
         foodNode3 = self.childNode(withName: "star")
         monsterNode = self.childNode(withName: "Monster")
+        node1Position = foodNode1?.position
+        node2Position = foodNode2?.position
+        node3Position = foodNode3?.position
         playInstructionsWithName(audioName: "instructions_star")
     }
     
     ////////////////////////////
     /////Helper Functions///////
     ////////////////////////////
+    @objc func runTimedCode(){
+        if gameCounter == 60{
+            nextScene(sceneName: "ChairScene")
+        } else if gameCounter%20 == 0 && gameCounter != 0{
+            playFeedbackWithName(audioName: "reminder_star")
+            gameCounter = gameCounter + 1
+        }else{
+            gameCounter = gameCounter + 1
+        }
+    }
+    
     func playInstructionsWithName(audioName:String){
         instructionsComplete = false
         let instructions = SKAction.playSoundFileNamed(audioName, waitForCompletion: true)
-        self.run(instructions, completion: { self.instructionsComplete = true })
+        self.run(instructions, completion: {
+            self.instructionsComplete = true
+            self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
+            
+        })
     }
     
     func playFeedbackWithName(audioName:String){
@@ -57,6 +81,14 @@ class StarScene: SKScene {
         let openMouthAction = SKAction.repeat(animation, count: 10)
         monsterNode!.run(openMouthAction)
         playFeedbackWithName(audioName: withAudio)
+    }
+    
+    func animateMonster_incorrect(){
+        let openMouth = SKTexture(imageNamed: "monsterScene_stillMonster")
+        let sadMouth = SKTexture(imageNamed: "monsterScene_sadMonster")
+        let sadAnimate = SKAction.animate(with: [sadMouth, openMouth], timePerFrame: 2)
+        //let reset = SKAction.animate(with: [openMouth], timePerFrame: 0.5)
+        monsterNode!.run(sadAnimate)
     }
     
     func nextScene(sceneName:String){
@@ -115,8 +147,14 @@ class StarScene: SKScene {
                         nextScene(sceneName: "ChairScene")
                     }else{
                         playFeedbackWithName(audioName: "wrong")
+                        animateMonster_incorrect()
+                        if selectedNode == foodNode1{
+                            foodNode1?.position = node1Position!
+                        }else{
+                            foodNode2?.position = node2Position!
+                        }
                         star_incorrectTouches += 1
-                        if star_incorrectTouches > 10{
+                        if star_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "ChairScene")
                         }

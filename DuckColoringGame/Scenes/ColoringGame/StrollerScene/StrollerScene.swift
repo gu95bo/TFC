@@ -26,7 +26,7 @@ class StrollerScene: SKScene {
         self.physicsBody = nil
         
         // run the introductory instructions, then flag instructionsComplete as true
-        let instructions = SKAction.playSoundFileNamed("instructions_stroller", waitForCompletion: true)
+        let instructions = SKAction.playSoundFileNamed("instructions_swing", waitForCompletion: true)
         run(instructions, completion: { self.instructionsComplete = true })
         
         /////////////////////////////////
@@ -40,7 +40,7 @@ class StrollerScene: SKScene {
         // set up sequence for if the scene has not been touched for 10 seconds: play the idle reminder
         let reminderIfIdle = SKAction.run {
             self.reminderComplete = false
-            let stroller_reminder = SKAction.playSoundFileNamed("reminder_stroller", waitForCompletion: true)
+            let stroller_reminder = SKAction.playSoundFileNamed("reminder_swing", waitForCompletion: true)
             self.run(stroller_reminder, completion: { self.reminderComplete = true} )
         }
         
@@ -59,12 +59,12 @@ class StrollerScene: SKScene {
                 // ... and start timer over...
                 timerCount = 1
             }
-            // if timer seconds are divisable by 10 and totalTimerCount is less than one minute...
-            if (timerCount % 10 == 0) && totalTimerCount <= 58  {
+            // if timer seconds are divisable by 20 and totalTimerCount is less than one minute...
+            if (timerCount % 20 == 0) && totalTimerCount <= 58  {
                 // ... play the reminder.
                 self.run(reminderIfIdle)
             }
-            // if idleReminer has played 6 times in a row, move on to next scene
+            // if idleReminer has played 3 times in a row, move on to next scene
             if totalTimerCount > 59 {
                 self.sceneOver = true
                 
@@ -111,21 +111,21 @@ class StrollerScene: SKScene {
                 }
                 
                 // Change sprite to colored stroller
-                let coloredstroller:SKTexture = SKTexture(imageNamed: "strollerScene_stroller_colored")
-                let changeToColored:SKAction = SKAction.animate(with: [coloredstroller], timePerFrame: 0.0001)
+                let swingNeutral:SKTexture = SKTexture(imageNamed: "Swing_neutral")
+                let swingLeft:SKTexture = SKTexture(imageNamed: "Swing_left")
+                let swingRight:SKTexture = SKTexture(imageNamed: "Swing_right")
+                let changeToColored:SKAction = SKAction.animate(with: [swingLeft, swingNeutral, swingRight, swingNeutral, swingLeft, swingNeutral], timePerFrame: 0.5)
                 
                 //Variables for stroller audio
-                let giggles = SKAction.playSoundFileNamed("stroller", waitForCompletion: true)
-                let birds = SKAction.playSoundFileNamed("stroller2", waitForCompletion: true)
+                let swinging = SKAction.playSoundFileNamed("Swing effect", waitForCompletion: true)
                 
                 // Variable for move action
-                let move = SKAction.moveTo(x: -900, duration: 3.0)
+                //let move = SKAction.moveTo(x: -900, duration: 3.0)
                 
                 //Run all actions
                 stroller!.run(changeToColored)
-                stroller!.run(giggles)
-                stroller!.run(birds)
-                stroller!.run(move)
+                stroller!.run(swinging)
+//                stroller!.run(move)
 
                 transitionScene (currentScene: self, sceneString: "ToastScene", waitTime: 3, fadeTime: 1)
             }
@@ -140,11 +140,11 @@ class StrollerScene: SKScene {
             }
             
             // play reminder instructions if user has touched screen 3 times incorrectly (don't play for 15th touch - just move on)
-            if (stroller_incorrectTouches % 3 == 0) && stroller_correctTouches < 1 && stroller_incorrectTouches < 14 {
-                reminderComplete = false
-                let stroller_reminder = SKAction.playSoundFileNamed("reminder_stroller", waitForCompletion: true)
-                run(stroller_reminder, completion: { self.reminderComplete = true} )
-            }
+//            if (stroller_incorrectTouches % 3 == 0) && stroller_correctTouches < 1 && stroller_incorrectTouches < 14 {
+//                reminderComplete = false
+//                let stroller_reminder = SKAction.playSoundFileNamed("reminder_stroller", waitForCompletion: true)
+//                run(stroller_reminder, completion: { self.reminderComplete = true} )
+//            }
         }
         // update totalTouches variable for idle reminder
         totalTouches = stroller_correctTouches + stroller_incorrectTouches

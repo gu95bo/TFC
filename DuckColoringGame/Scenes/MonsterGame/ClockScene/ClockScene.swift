@@ -10,6 +10,9 @@ import SpriteKit
 import GameplayKit
 
 class ClockScene: SKScene {
+    //Timer Variables
+    var gameTimer: Timer!
+    var gameCounter = 0
     
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
@@ -35,15 +38,31 @@ class ClockScene: SKScene {
         foodNode4 = self.childNode(withName: "coffee")
         monsterNode = self.childNode(withName: "Monster")
         playInstructionsWithName(audioName: "instructions_clock")
+        
     }
     
     ////////////////////////////
     /////Helper Functions///////
     ////////////////////////////
+    @objc func runTimedCode(){
+        if gameCounter == 60{
+            nextScene(sceneName: "StartScene")
+        } else if gameCounter%20 == 0 && gameCounter != 0{
+            playFeedbackWithName(audioName: "reminder_clock")
+            gameCounter = gameCounter + 1
+        }else{
+            gameCounter = gameCounter + 1
+        }
+    }
+    
     func playInstructionsWithName(audioName:String){
         instructionsComplete = false
         let instructions = SKAction.playSoundFileNamed(audioName, waitForCompletion: true)
-        self.run(instructions, completion: { self.instructionsComplete = true })
+        self.run(instructions, completion: {
+            self.instructionsComplete = true
+            self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
+            
+        })
     }
     
     func playFeedbackWithName(audioName:String){
@@ -122,7 +141,7 @@ class ClockScene: SKScene {
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         clock_incorrectTouches += 1
-                        if clock_incorrectTouches > 10{
+                        if clock_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "StartScene")
                         }
