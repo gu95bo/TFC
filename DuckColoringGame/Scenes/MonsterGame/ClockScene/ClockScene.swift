@@ -36,7 +36,7 @@ class ClockScene: SKScene {
     private var sceneOver = false
     
     override func didMove(to view: SKView) {
-        foodNode1 = self.childNode(withName: "stairs")
+        foodNode1 = self.childNode(withName: "jacket")
         foodNode2 = self.childNode(withName: "duck")
         foodNode3 = self.childNode(withName: "clock")
         foodNode4 = self.childNode(withName: "coffee")
@@ -88,6 +88,14 @@ class ClockScene: SKScene {
         playFeedbackWithName(audioName: withAudio)
     }
     
+    func animateMonster_incorrect(){
+        let openMouth = SKTexture(imageNamed: "monsterScene_stillMonster")
+        let sadMouth = SKTexture(imageNamed: "monsterScene_sadMonster")
+        let sadAnimate = SKAction.animate(with: [sadMouth, openMouth], timePerFrame: 2)
+        //let reset = SKAction.animate(with: [openMouth], timePerFrame: 0.5)
+        monsterNode!.run(sadAnimate)
+    }
+    
     func nextScene(sceneName:String){
         let fadeOut = SKAction.fadeOut(withDuration:1)
         let wait2 = SKAction.wait(forDuration: 1)
@@ -104,7 +112,7 @@ class ClockScene: SKScene {
         if (instructionsComplete == true) && (feedbackComplete == true) && (sceneOver == false){
             let touch = touches.first!
             let touchLocation = touch.location(in: self)
-            if (self.atPoint(touchLocation).name == "stairs"){
+            if (self.atPoint(touchLocation).name == "jacket"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
             } else if (self.atPoint(touchLocation).name == "duck"){
@@ -148,11 +156,12 @@ class ClockScene: SKScene {
                         nextScene(sceneName: "StartScene")
                     }else{
                         playFeedbackWithName(audioName: "wrong")
+                        animateMonster_incorrect()
                         clock_incorrectTouches += 1
                         if selectedNode == foodNode1{
-                            foodNode2?.position = node2Position!
+                            foodNode1?.position = node1Position!
                         }else if selectedNode == foodNode2{
-                            foodNode3?.position = node3Position!
+                            foodNode2?.position = node2Position!
                         }else{
                             foodNode4?.position = node4Position!
                         }
