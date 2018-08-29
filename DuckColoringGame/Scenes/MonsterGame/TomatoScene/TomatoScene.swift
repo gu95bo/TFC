@@ -149,7 +149,7 @@ class TomatoScene: SKScene {
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
                         if selectedNode == foodNode2{
-                            foodNode2?.position = node1Position!
+                            foodNode2?.position = node2Position!
                         }else{
                             foodNode3?.position = node3Position!
                         }
