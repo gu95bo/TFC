@@ -30,6 +30,7 @@ class CandyScene: SKScene {
     //Score tracking Variables
     var candy_incorrectTouches = 0
     var candy_correctTouches = 0
+    var totalTouches = 0
     
     //Audio Tracking Variables
     var instructionsComplete:Bool = false
@@ -71,7 +72,6 @@ class CandyScene: SKScene {
         self.run(instructions, completion: {
             self.instructionsComplete = true
             self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: true)
-            
         })
     }
     
@@ -146,10 +146,16 @@ class CandyScene: SKScene {
                 if items.name == "Monster"{
                     if (selectedNode?.name == "candy"){
                         candy_correctTouches += 1
+                        monster_numCorrectPerScene["candyScene"]! += 1
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
                         nextScene(sceneName: "OrangeScene")
+                        if (candy_incorrectTouches == 0){
+                            monster_totalCorrectFT += 1
+                            monster_twoItemCorrectFT += 1
+                            monster_correctFirstTries["candyScene"] = true
+                        }
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
@@ -165,6 +171,7 @@ class CandyScene: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = candy_correctTouches + candy_incorrectTouches
     }
 }
 

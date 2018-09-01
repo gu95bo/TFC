@@ -49,23 +49,24 @@ var comboNumFTDict: [String:Int] = ["twoItemSimple": 0, "twoItemLine": 0, "twoIt
 var comboAccuracyDict: [String:Double] = ["twoItemSimple": 0.0, "twoItemLine": 0.0, "twoItemScene": 0.0, "threeItemSimple": 0.0, "threeItemLine": 0.0, "threeItemScene": 0.0, "fourItemSimple": 0.0, "fourItemLine": 0.0, "fourItemScene": 0.0]
 
 ////// Monster Scene Analytics/Scoring //////
-//var monster_numOfScenesCompleted = 0.0
-//var monster_twoItemCompleted = 0.0
-//var monster_threeItemCompleted = 0.0
-//var monster_fourItemCompleted = 0.0
-//
-//var monster_twoItemCorrectFT = 0
-//var monster_threeItemCorrectFT = 0
-//var monster_fourItemCorrectFT = 0
-//
-//var monster_totalAccuracy = 0.0
-//var monster_twoItemAccuracy = 0.0
-//var monster_threeItemAccuracy = 0.0
-//var monster_fourItemAccuracy = 0.0
-//
-//var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "cupscene": false]
-//var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "cupscene": 0]
-//var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "cupscene": 0]
+var monster_numOfScenesCompleted = 0.0
+var monster_twoItemCompleted = 0.0
+var monster_threeItemCompleted = 0.0
+var monster_fourItemCompleted = 0.0
+
+var monster_totalCorrectFT = 0
+var monster_twoItemCorrectFT = 0
+var monster_threeItemCorrectFT = 0
+var monster_fourItemCorrectFT = 0
+
+var monster_totalAccuracy = 0.0
+var monster_twoItemAccuracy = 0.0
+var monster_threeItemAccuracy = 0.0
+var monster_fourItemAccuracy = 0.0
+
+var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "cupscene": false]
+var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "cupscene": 0]
+var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "cupscene": 0]
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
