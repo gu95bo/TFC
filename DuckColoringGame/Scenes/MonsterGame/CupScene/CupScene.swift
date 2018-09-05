@@ -14,21 +14,29 @@ class CupScene: SKScene {
     var gameTimer: Timer!
     var gameCounter = 0
     
+    //Variables for food and monster nodes
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     
+    //Variables for node dragging and tracking
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
+    //Score tracking Variables
     var cup_incorrectTouches = 0
     var cup_correctTouches = 0
+    var totalTouches = 0
     
+    //Audio Tracking Variables
     var instructionsComplete:Bool = false
     var feedbackComplete:Bool = true
     
+    //Scene Completion Variable
     var sceneOver = false
     
     override func didMove(to view: SKView) {
@@ -133,10 +141,16 @@ class CupScene: SKScene {
                 if items.name == "Monster"{
                     if (selectedNode?.name == "cup"){
                         cup_correctTouches += 1
+                        monster_numCorrectPerScene["cupScene"]! += 1
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
                         nextScene(sceneName: "PenScene")
+                        if (cup_incorrectTouches == 0){
+                            monster_totalCorrectFT += 1
+                            monster_twoItemCorrectFT += 1
+                            monster_correctFirstTries["cupScene"] = true
+                        }
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
@@ -152,6 +166,7 @@ class CupScene: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = cup_correctTouches + cup_incorrectTouches
     }
 }
 

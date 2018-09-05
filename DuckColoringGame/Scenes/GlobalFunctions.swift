@@ -64,9 +64,10 @@ var monster_twoItemAccuracy = 0.0
 var monster_threeItemAccuracy = 0.0
 var monster_fourItemAccuracy = 0.0
 
-var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "cupscene": false]
-var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "cupscene": 0]
-var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "cupscene": 0]
+var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "cupScene": false]
+var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "cupScene": 0]
+var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "cupScene": 0]
+var monster_accuracyPerScene: [String:Double] = ["candyScene": 0, "cupScene": 0]
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,6 +147,20 @@ func printListLabel (scene: SKScene, label: SKLabelNode, words: String, xCoord: 
     label.numberOfLines = 0
     label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
     scene.addChild(label)
+}
+
+func calculateAccuracy_monster (currentScene: SKScene, scene: String) {
+    if let _ = monster_numCorrectPerScene[scene] {
+        if (monster_numCorrectPerScene[scene]! == 0) {
+            if let _ = monster_accuracyPerScene[scene] {
+                monster_accuracyPerScene[scene] = 0
+            }
+        }
+        else if (monster_numIncorrectPerScene[scene]! == 0) {monster_accuracyPerScene[scene] = 100 }
+        else {
+            monster_accuracyPerScene[scene] = round((Double(monster_numCorrectPerScene[scene]!) / Double(monster_numIncorrectPerScene[scene]! + monster_numCorrectPerScene[scene]!)) * 100)
+        }
+    }
 }
 
 func calculateAccuracy (currentScene: SKScene, scene: String) {

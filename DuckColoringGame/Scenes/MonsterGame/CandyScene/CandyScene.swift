@@ -161,6 +161,7 @@ class CandyScene: SKScene {
                         animateMonster_incorrect()
                         selectedNode?.position = node1Position!
                         candy_incorrectTouches += 1
+                        monster_numIncorrectPerScene["candyScene"]! += 1
                         if candy_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "OrangeScene")

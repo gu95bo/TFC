@@ -210,6 +210,8 @@
 		0B3EFEDD2046336600F5932F /* instructions_piano3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B3EFEC92046336600F5932F /* instructions_piano3.wav */; };
 		0B3EFEDE2046336600F5932F /* correctMelody3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B3EFECA2046336600F5932F /* correctMelody3.wav */; };
 		0B3EFEE72046341D00F5932F /* Sound_Chewing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B3EFEE22046341D00F5932F /* Sound_Chewing.mp3 */; };
+		0B619886213A63E4008DF8FC /* ScoreScene_Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B619885213A63E4008DF8FC /* ScoreScene_Monster.swift */; };
+		0B619888213A6408008DF8FC /* ScoreScene_Monster.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B619887213A6408008DF8FC /* ScoreScene_Monster.sks */; };
 		0B7D1723208A7001001BD48A /* moon.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B7D1722208A7001001BD48A /* moon.wav */; };
 		0B8BA80020CD193A0091CBAB /* instructions_hat_monster.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B8BA7F920CD19390091CBAB /* instructions_hat_monster.mp3 */; };
 		0B8BA80120CD193A0091CBAB /* instructions_penny.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B8BA7FA20CD19390091CBAB /* instructions_penny.mp3 */; };
@@ -487,6 +489,8 @@
 		0B3EFECA2046336600F5932F /* correctMelody3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctMelody3.wav; sourceTree = "<group>"; };
 		0B3EFEDF204633EB00F5932F /* correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = correct.mp3; path = DuckColoringGame/Audio/correct.mp3; sourceTree = SOURCE_ROOT; };
 		0B3EFEE22046341D00F5932F /* Sound_Chewing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sound_Chewing.mp3; sourceTree = "<group>"; };
+		0B619885213A63E4008DF8FC /* ScoreScene_Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreScene_Monster.swift; sourceTree = "<group>"; };
+		0B619887213A6408008DF8FC /* ScoreScene_Monster.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ScoreScene_Monster.sks; sourceTree = "<group>"; };
 		0B7D1722208A7001001BD48A /* moon.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = moon.wav; sourceTree = "<group>"; };
 		0B8BA7F920CD19390091CBAB /* instructions_hat_monster.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = instructions_hat_monster.mp3; sourceTree = "<group>"; };
 		0B8BA7FA20CD19390091CBAB /* instructions_penny.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = instructions_penny.mp3; sourceTree = "<group>"; };
@@ -1071,6 +1075,8 @@
 				068ED928205595200054ED9B /* ScoreScene2 */,
 				068ED929205595290054ED9B /* ScoreScene3 */,
 				068ED92A205595310054ED9B /* ScoreScene4 */,
+				0B619885213A63E4008DF8FC /* ScoreScene_Monster.swift */,
+				0B619887213A6408008DF8FC /* ScoreScene_Monster.sks */,
 			);
 			path = EndGameScenes;
 			sourceTree = "<group>";
@@ -1781,6 +1787,7 @@
 				0B279EA82055099F00ABAA57 /* ChairScene.sks in Resources */,
 				0669B8EE20040486002D8CAC /* TrashScene.sks in Resources */,
 				0643D693202E140A000FA53D /* DuckScene.sks in Resources */,
+				0B619888213A6408008DF8FC /* ScoreScene_Monster.sks in Resources */,
 				066DB6381FAE8F1500C68B36 /* LaunchScreen.storyboard in Resources */,
 				0613CCBB205045E100FEC3F4 /* reminder_hand.mp3 in Resources */,
 				0613CCCF205046CC00FEC3F4 /* reminder_stroller.mp3 in Resources */,
@@ -1883,6 +1890,7 @@
 				0BCA0AAD201BCE0000488E8E /* Monster_T2.swift in Sources */,
 				06C819DE202F6D15002F838E /* AllDoneScene.swift in Sources */,
 				0BCA0A9B201BCC2100488E8E /* Trainer_Bread.swift in Sources */,
+				0B619886213A63E4008DF8FC /* ScoreScene_Monster.swift in Sources */,
 				0613CCE72050A69400FEC3F4 /* GlobalFunctions.swift in Sources */,
 				0B279ECE20564D2100ABAA57 /* MoonScene_Monster.swift in Sources */,
 				0BCA0AAF201BCE0000488E8E /* Monster_T1.swift in Sources */,
