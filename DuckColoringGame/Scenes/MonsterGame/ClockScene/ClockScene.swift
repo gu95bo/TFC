@@ -54,7 +54,7 @@ class ClockScene: SKScene {
     ////////////////////////////
     @objc func runTimedCode(){
         if gameCounter == 60{
-            nextScene(sceneName: "StartScene")
+            nextScene(sceneName: "ScoreScene_Monster")
         } else if gameCounter%20 == 0 && gameCounter != 0{
             playFeedbackWithName(audioName: "reminder_clock")
             gameCounter = gameCounter + 1
@@ -153,7 +153,7 @@ class ClockScene: SKScene {
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
-                        nextScene(sceneName: "StartScene")
+                        nextScene(sceneName: "ScoreScene_Monster")
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
@@ -167,7 +167,7 @@ class ClockScene: SKScene {
                         }
                         if clock_incorrectTouches > 15{
                             sceneOver = true
-                            nextScene(sceneName: "StartScene")
+                            nextScene(sceneName: "ScoreScene_Monster")
                         }
                     }
                 }
