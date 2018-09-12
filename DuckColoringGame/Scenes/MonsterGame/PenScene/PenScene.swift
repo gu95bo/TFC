@@ -133,6 +133,13 @@ class PenScene: SKScene {
                 if items.name == "Monster"{
                     if (selectedNode?.name == "pen"){
                         pen_correctTouches += 1
+                        monster_numCorrectPerScene["penScene"]! += 1
+                        if (pen_incorrectTouches == 0){
+                            monster_totalCorrectFT += 1
+                            monster_twoItemCorrectFT += 1
+                            monster_correctFirstTries["penScene"] = true
+                        }
+
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
@@ -142,6 +149,7 @@ class PenScene: SKScene {
                         animateMonster_incorrect()
                         foodNode1?.position = node1Position!
                         pen_incorrectTouches += 1
+                        monster_numIncorrectPerScene["penScene"]! += 1
                         if pen_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "TomatoScene")

@@ -140,6 +140,12 @@ class OrangeScene: SKScene {
                 if items.name == "Monster"{
                     if (selectedNode?.name == "orange"){
                         orange_correctTouches += 1
+                        monster_numCorrectPerScene["orangeScene"]! += 1
+                        if (orange_incorrectTouches == 0){
+                            monster_totalCorrectFT += 1
+                            monster_twoItemCorrectFT += 1
+                            monster_correctFirstTries["orangeScene"] = true
+                        }
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Chewing")
@@ -149,6 +155,7 @@ class OrangeScene: SKScene {
                         animateMonster_incorrect()
                         foodNode1?.position = node1Position!
                         orange_incorrectTouches += 1
+                        monster_numIncorrectPerScene["orangeScene"]! += 1
                         if orange_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "ToothScene")

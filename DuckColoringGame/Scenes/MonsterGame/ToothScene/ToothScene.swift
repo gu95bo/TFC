@@ -135,6 +135,12 @@ class ToothScene: SKScene {
                 if items.name == "Monster"{
                     if (selectedNode?.name == "tooth"){
                         tooth_correctTouches += 1
+                        monster_numCorrectPerScene["toothScene"]! += 1
+                        if (tooth_incorrectTouches == 0){
+                            monster_totalCorrectFT += 1
+                            monster_twoItemCorrectFT += 1
+                            monster_correctFirstTries["tootheScene"] = true
+                        }
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
@@ -144,6 +150,7 @@ class ToothScene: SKScene {
                         animateMonster_incorrect()
                         foodNode2?.position = node2Position!
                         tooth_incorrectTouches += 1
+                        monster_numIncorrectPerScene["toothScene"]! += 1
                         if tooth_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "FlowerScene")

@@ -135,6 +135,12 @@ class FlowerScene: SKScene {
                 if items.name == "Monster"{
                     if (selectedNode?.name == "flower"){
                         flower_correctTouches += 1
+                        monster_numCorrectPerScene["flowerScene"]! += 1
+                        if (flower_incorrectTouches == 0){
+                            monster_totalCorrectFT += 1
+                            monster_twoItemCorrectFT += 1
+                            monster_correctFirstTries["flowerScene"] = true
+                        }
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Munching")
@@ -144,6 +150,7 @@ class FlowerScene: SKScene {
                         animateMonster_incorrect()
                         foodNode2?.position = node2Position!
                         flower_incorrectTouches += 1
+                        monster_numIncorrectPerScene["flowerScene"]! += 1
                         if flower_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "CupScene")
