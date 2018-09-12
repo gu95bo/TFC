@@ -142,20 +142,22 @@ class CupScene: SKScene {
                     if (selectedNode?.name == "cup"){
                         cup_correctTouches += 1
                         monster_numCorrectPerScene["cupScene"]! += 1
-                        selectedNode?.removeFromParent()
-                        sceneOver = true
-                        animateMonster(withAudio: "Sound_Biting")
-                        nextScene(sceneName: "PenScene")
                         if (cup_incorrectTouches == 0){
                             monster_totalCorrectFT += 1
                             monster_twoItemCorrectFT += 1
                             monster_correctFirstTries["cupScene"] = true
                         }
+                        selectedNode?.removeFromParent()
+                        sceneOver = true
+                        animateMonster(withAudio: "Sound_Biting")
+                        nextScene(sceneName: "PenScene")
+                        
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
                         foodNode1?.position = node1Position!
                         cup_incorrectTouches += 1
+                        monster_numIncorrectPerScene["cupScene"]! += 1
                         if cup_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "PenScene")
@@ -169,6 +171,3 @@ class CupScene: SKScene {
         totalTouches = cup_correctTouches + cup_incorrectTouches
     }
 }
-
-
-

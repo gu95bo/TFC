@@ -92,8 +92,9 @@ class ScoreScene_Monster: SKScene {
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
         // CALCULATE AND PLACE 2-ITEM ACCURACY LABEL
-        let twoItemArray: [String] = ["candyScene", "cupScene"]
+        let twoItemArray: [String] = ["candyScene","orangeScene", "toothScene", "flowerScene", "cupScene", "penScene"]
         for item in twoItemArray {
+            print(String(item) + "  ", monster_accuracyPerScene[item]!)
             if monster_accuracyPerScene[item]! > 0.0 {
                 monster_twoItemAccuracy += monster_accuracyPerScene[item]!
                 monster_twoItemCompleted += 1

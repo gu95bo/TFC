@@ -147,15 +147,16 @@ class CandyScene: SKScene {
                     if (selectedNode?.name == "candy"){
                         candy_correctTouches += 1
                         monster_numCorrectPerScene["candyScene"]! += 1
-                        selectedNode?.removeFromParent()
-                        sceneOver = true
-                        animateMonster(withAudio: "Sound_Biting")
-                        nextScene(sceneName: "OrangeScene")
                         if (candy_incorrectTouches == 0){
                             monster_totalCorrectFT += 1
                             monster_twoItemCorrectFT += 1
                             monster_correctFirstTries["candyScene"] = true
                         }
+                        selectedNode?.removeFromParent()
+                        sceneOver = true
+                        animateMonster(withAudio: "Sound_Biting")
+                        nextScene(sceneName: "OrangeScene")
+                        
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
@@ -175,4 +176,3 @@ class CandyScene: SKScene {
         totalTouches = candy_correctTouches + candy_incorrectTouches
     }
 }
-

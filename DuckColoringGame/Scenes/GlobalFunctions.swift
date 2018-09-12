@@ -64,10 +64,10 @@ var monster_twoItemAccuracy = 0.0
 var monster_threeItemAccuracy = 0.0
 var monster_fourItemAccuracy = 0.0
 
-var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "cupScene": false]
-var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "cupScene": 0]
-var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "cupScene": 0]
-var monster_accuracyPerScene: [String:Double] = ["candyScene": 0, "cupScene": 0]
+var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "orangeScene": false, "toothScene": false, "flowerScene": false, "cupScene": false, "penScene": false]
+var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
+var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
+var monster_accuracyPerScene: [String:Double] = ["candyScene": 0, "orangeScene":0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
