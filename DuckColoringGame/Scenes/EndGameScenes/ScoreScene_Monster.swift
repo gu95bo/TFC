@@ -11,7 +11,7 @@ import SpriteKit
 class ScoreScene_Monster: SKScene {
     // LOCAL VARIABLES FOR LABELS
     let totalCorrectFTLabel = SKLabelNode(fontNamed:"Montserrat-SemiBold")
-    let totalAccuracyLabel = SKLabelNode(fontNamed: "Montserrat-SemiBold")
+    let totalCorrectFFLabel = SKLabelNode(fontNamed: "Montserrat-SemiBold")
     
     let setSize2Label = SKLabelNode(fontNamed: "Montserrat-Regular")
     let setSize3Label = SKLabelNode(fontNamed: "Montserrat-Regular")
@@ -74,39 +74,42 @@ class ScoreScene_Monster: SKScene {
         printLabel(scene: self, label: sceneBGLabel, words: sceneBGString, xCoord: 217, yCoord: -235.829, fontSize: 28)
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
-        // CALCULATE AND PLACE AVERAGE-ACCURACY LABEL
-        for (scene, accuracy) in monster_accuracyPerScene {
-            if (monster_accuracyPerScene[scene]! > 0) {
-                monster_totalAccuracy += accuracy
-                monster_numOfScenesCompleted += 1
-            }
-        }
-        monster_totalAccuracy = monster_totalAccuracy / monster_numOfScenesCompleted
-        var totalAccuracyString:String
-        if (monster_totalAccuracy > 0.0 ) {
-            totalAccuracyString = "\(Int(round(monster_totalAccuracy)))%"
-        } else {
-            totalAccuracyString = "0%"
-        }
-        printLabel(scene: self, label: totalAccuracyLabel, words: totalAccuracyString, xCoord: -475, yCoord: 211, fontSize: 150)
+        // PLACE TOTAL-CORRECT-FF LABEL
+        let totalCorrectFfText = "\(monster_totalCorrectFF) / 18"
+        printLabel(scene: self, label: totalCorrectFFLabel, words: totalCorrectFfText, xCoord: -475, yCoord: 211, fontSize: 150)
+//        for (scene, accuracy) in monster_accuracyPerScene {
+//            if (monster_accuracyPerScene[scene]! > 0) {
+//                monster_totalAccuracy += accuracy
+//                monster_numOfScenesCompleted += 1
+//            }
+//        }
+//        _ = "Fix this part right here for FF"
+//        monster_totalAccuracy = monster_totalAccuracy / monster_numOfScenesCompleted
+//        var totalAccuracyString:String
+//        if (monster_totalAccuracy > 0.0 ) {
+//            totalAccuracyString = "\(Int(round(monster_totalAccuracy)))%"
+//        } else {
+//            totalAccuracyString = "0%"
+//        }
+//        printLabel(scene: self, label: totalCorrectFFLabel, words: totalAccuracyString, xCoord: -475, yCoord: 211, fontSize: 150)
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
         // CALCULATE AND PLACE 2-ITEM ACCURACY LABEL
-        let twoItemArray: [String] = ["candyScene","orangeScene", "toothScene", "flowerScene", "cupScene", "penScene"]
-        for item in twoItemArray {
-            print(String(item) + "  ", monster_accuracyPerScene[item]!)
-            if monster_accuracyPerScene[item]! > 0.0 {
-                monster_twoItemAccuracy += monster_accuracyPerScene[item]!
-                monster_twoItemCompleted += 1
-            }
-        }
+//        let twoItemArray: [String] = ["candyScene","orangeScene", "toothScene", "flowerScene", "cupScene", "penScene"]
+//        for item in twoItemArray {
+//            print(String(item) + "  ", monster_accuracyPerScene[item]!)
+//            if monster_accuracyPerScene[item]! > 0.0 {
+//                monster_twoItemAccuracy += monster_accuracyPerScene[item]!
+//                monster_twoItemCompleted += 1
+//            }
+//        }
         monster_twoItemAccuracy = monster_twoItemAccuracy / monster_twoItemCompleted
-        var twoItemAccuracyText:String
-        if monster_twoItemCompleted > 0 {
-            twoItemAccuracyText = "\(Int(round(monster_twoItemAccuracy)))%"
-        } else {
-            twoItemAccuracyText = "none completed"
-        }
+        let twoItemAccuracyText:String = "\(monster_twoItemCorrectFF) / 6"
+//        if monster_twoItemCompleted > 0 {
+//            twoItemAccuracyText = "\(Int(round(monster_twoItemAccuracy)))%"
+//        } else {
+//            twoItemAccuracyText = "none completed"
+//        }
         printLabel(scene: self, label: twoItemAccuracyLabel, words: twoItemAccuracyText, xCoord: -490, yCoord: -14.482, fontSize: 28)
         
         // CALCULATE AND PLACE 3-ITEM ACCURACY LABEL
@@ -212,7 +215,7 @@ class ScoreScene_Monster: SKScene {
         
         // if retry button is touched
         if playAgainButton!.contains(touch.location(in: self)) {
-            resetAllGameStats_coloring()
+            resetAllGameStats_monster()
             transitionScene (currentScene: self, sceneString: "StartScene", waitTime: 1, fadeTime: 0)
         }
     }

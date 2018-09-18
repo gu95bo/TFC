@@ -59,12 +59,18 @@ var monster_twoItemCorrectFT = 0
 var monster_threeItemCorrectFT = 0
 var monster_fourItemCorrectFT = 0
 
+var monster_totalCorrectFF = 0
+var monster_twoItemCorrectFF = 0
+var monster_threeItemCorrectFF = 0
+var monster_fourItemCorrectFF = 0
+
 var monster_totalAccuracy = 0.0
 var monster_twoItemAccuracy = 0.0
 var monster_threeItemAccuracy = 0.0
 var monster_fourItemAccuracy = 0.0
 
 var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "orangeScene": false, "toothScene": false, "flowerScene": false, "cupScene": false, "penScene": false]
+var monster_correctFirstFeed: [String:Bool] = ["candyScene": false, "orangeScene": false, "toothScene": false, "flowerScene": false, "cupScene": false, "penScene": false]
 var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
 var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
 var monster_accuracyPerScene: [String:Double] = ["candyScene": 0, "orangeScene":0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
@@ -225,6 +231,45 @@ func resetAllGameStats_coloring () {
     }
     for (scene, _) in comboNumIncorrectDict {
         comboAccuracyDict[scene] = 0
+    }
+}
+
+func resetAllGameStats_monster () {
+    monster_numOfScenesCompleted = 0.0
+    monster_twoItemCompleted = 0.0
+    monster_threeItemCompleted = 0.0
+    monster_fourItemCompleted = 0.0
+    
+    monster_totalCorrectFT = 0
+    monster_twoItemCorrectFT = 0
+    monster_threeItemCorrectFT = 0
+    monster_fourItemCorrectFT = 0
+    
+    monster_totalCorrectFF = 0
+    monster_twoItemCorrectFF = 0
+    monster_threeItemCorrectFF = 0
+    monster_fourItemCorrectFF = 0
+    
+    monster_totalAccuracy = 0.0
+    monster_twoItemAccuracy = 0.0
+    monster_threeItemAccuracy = 0.0
+    monster_fourItemAccuracy = 0.0
+    
+    
+    for (scene, _) in monster_correctFirstTries {
+        monster_correctFirstTries[scene] = false
+    }
+    for (scene, _) in monster_correctFirstFeed {
+        monster_correctFirstFeed[scene] = false
+    }
+    for (scene, _) in monster_numCorrectPerScene {
+        monster_numCorrectPerScene[scene] = 0
+    }
+    for (scene, _) in monster_numIncorrectPerScene {
+        monster_numIncorrectPerScene[scene] = 0
+    }
+    for (scene, _) in accuracyPerScene {
+        monster_accuracyPerScene[scene] = 0
     }
 }
 
