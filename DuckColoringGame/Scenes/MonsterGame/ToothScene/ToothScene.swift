@@ -14,21 +14,30 @@ class ToothScene: SKScene {
     var gameTimer: Timer!
     var gameCounter = 0
     
+    //Variables for food and monster nodes
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     
+    //Variables for node dragging and tracking
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
+    //Score tracking Variables
     var tooth_incorrectTouches = 0
     var tooth_correctTouches = 0
+    var firstFeedTracked = false
+    var totalTouches = 0
     
+    //Audio Tracking Variables
     var instructionsComplete:Bool = false
     var feedbackComplete:Bool = true
     
+    //Scene Completion Variable
     var sceneOver = false
     
     override func didMove(to view: SKView) {
@@ -107,9 +116,16 @@ class ToothScene: SKScene {
             if (self.atPoint(touchLocation).name == "tooth"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_twoItemCorrectFT += 1
+                    monster_correctFirstTries["toothScene"] = true
+                    tooth_correctTouches += 1
+                }
             } else if (self.atPoint(touchLocation).name == "plant"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                tooth_incorrectTouches += 1
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -135,12 +151,18 @@ class ToothScene: SKScene {
                 if items.name == "Monster"{
                     if (selectedNode?.name == "tooth"){
                         tooth_correctTouches += 1
-                        monster_numCorrectPerScene["toothScene"]! += 1
-                        if (tooth_incorrectTouches == 0){
-                            monster_totalCorrectFT += 1
-                            monster_twoItemCorrectFT += 1
-                            monster_correctFirstTries["tootheScene"] = true
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["candyScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_twoItemCorrectFF += 1
+                            firstFeedTracked = true
                         }
+                        monster_numCorrectPerScene["toothScene"]! += 1
+//                        if (tooth_incorrectTouches == 0){
+//                            monster_totalCorrectFT += 1
+//                            monster_twoItemCorrectFT += 1
+//                            monster_correctFirstTries["tootheScene"] = true
+//                        }
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
@@ -148,6 +170,7 @@ class ToothScene: SKScene {
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
+                        firstFeedTracked = true
                         foodNode2?.position = node2Position!
                         tooth_incorrectTouches += 1
                         monster_numIncorrectPerScene["toothScene"]! += 1
@@ -161,6 +184,7 @@ class ToothScene: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = tooth_correctTouches + tooth_incorrectTouches
     }
 }
 

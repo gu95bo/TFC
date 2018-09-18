@@ -18,6 +18,8 @@ class OrangeScene: SKScene {
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     
@@ -28,11 +30,14 @@ class OrangeScene: SKScene {
     //Score tracking Variables
     var orange_incorrectTouches = 0
     var orange_correctTouches = 0
+    var firstFeedTracked = false
+    var totalTouches = 0
     
     //Audio Tracking Variables
     var instructionsComplete:Bool = false
     var feedbackComplete:Bool = true
     
+    //Scene Completion Variable
     var sceneOver = false
     
     //Set up all nodes on screen. Play instruction.
@@ -112,9 +117,16 @@ class OrangeScene: SKScene {
             if (self.atPoint(touchLocation).name == "bug"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                orange_incorrectTouches += 1
             } else if (self.atPoint(touchLocation).name == "orange"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_twoItemCorrectFT += 1
+                    monster_correctFirstTries["orangeScene"] = true
+                    orange_correctTouches += 1
+                }
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -139,13 +151,19 @@ class OrangeScene: SKScene {
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
                     if (selectedNode?.name == "orange"){
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["orangeScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_twoItemCorrectFF += 1
+                            firstFeedTracked = true
+                        }
                         orange_correctTouches += 1
                         monster_numCorrectPerScene["orangeScene"]! += 1
-                        if (orange_incorrectTouches == 0){
-                            monster_totalCorrectFT += 1
-                            monster_twoItemCorrectFT += 1
-                            monster_correctFirstTries["orangeScene"] = true
-                        }
+//                        if (orange_incorrectTouches == 0){
+//                            monster_totalCorrectFT += 1
+//                            monster_twoItemCorrectFT += 1
+//                            monster_correctFirstTries["orangeScene"] = true
+//                        }
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Chewing")
@@ -153,6 +171,7 @@ class OrangeScene: SKScene {
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
+                        firstFeedTracked = true
                         foodNode1?.position = node1Position!
                         orange_incorrectTouches += 1
                         monster_numIncorrectPerScene["orangeScene"]! += 1
@@ -166,5 +185,6 @@ class OrangeScene: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = orange_correctTouches + orange_incorrectTouches
     }
 }
