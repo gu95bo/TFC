@@ -30,6 +30,7 @@ class CupScene: SKScene {
     //Score tracking Variables
     var cup_incorrectTouches = 0
     var cup_correctTouches = 0
+    var firstFeedTracked = false
     var totalTouches = 0
     
     //Audio Tracking Variables
@@ -113,9 +114,16 @@ class CupScene: SKScene {
             if (self.atPoint(touchLocation).name == "cloud"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                cup_incorrectTouches += 1
             } else if (self.atPoint(touchLocation).name == "cup"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_twoItemCorrectFT += 1
+                    monster_correctFirstTries["cupScene"] = true
+                    cup_correctTouches += 1
+                }
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -140,13 +148,18 @@ class CupScene: SKScene {
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
                     if (selectedNode?.name == "cup"){
-                        cup_correctTouches += 1
-                        monster_numCorrectPerScene["cupScene"]! += 1
-                        if (cup_incorrectTouches == 0){
-                            monster_totalCorrectFT += 1
-                            monster_twoItemCorrectFT += 1
-                            monster_correctFirstTries["cupScene"] = true
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["candyScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_twoItemCorrectFF += 1
+                            firstFeedTracked = true
                         }
+                        monster_numCorrectPerScene["cupScene"]! += 1
+//                        if (cup_incorrectTouches == 0){
+//                            monster_totalCorrectFT += 1
+//                            monster_twoItemCorrectFT += 1
+//                            monster_correctFirstTries["cupScene"] = true
+//                        }
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
@@ -155,7 +168,8 @@ class CupScene: SKScene {
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
-                        foodNode1?.position = node1Position!
+                        firstFeedTracked = true
+                        selectedNode?.position = node1Position!
                         cup_incorrectTouches += 1
                         monster_numIncorrectPerScene["cupScene"]! += 1
                         if cup_incorrectTouches > 15{

@@ -109,16 +109,16 @@ class FlowerScene: SKScene {
             if (self.atPoint(touchLocation).name == "flower"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
-                flower_incorrectTouches += 1
-            } else if (self.atPoint(touchLocation).name == "towel"){
-                selectedNode = foodNode2
-                nodeIsSelected = true
                 if (totalTouches == 0){
                     monster_totalCorrectFT += 1
                     monster_twoItemCorrectFT += 1
                     monster_correctFirstTries["flowerScene"] = true
                     flower_correctTouches += 1
                 }
+            } else if (self.atPoint(touchLocation).name == "towel"){
+                selectedNode = foodNode2
+                nodeIsSelected = true
+                flower_incorrectTouches += 1
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -163,7 +163,7 @@ class FlowerScene: SKScene {
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
                         firstFeedTracked = true
-                        foodNode2?.position = node2Position!
+                        selectedNode?.position = node2Position!
                         flower_incorrectTouches += 1
                         monster_numIncorrectPerScene["flowerScene"]! += 1
                         if flower_incorrectTouches > 15{

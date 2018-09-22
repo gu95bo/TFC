@@ -14,21 +14,30 @@ class PenScene: SKScene {
     var gameTimer: Timer!
     var gameCounter = 0
     
+    //Variables for food and monster nodes
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     
+    //Variables for node dragging and tracking
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
+    //Score tracking Variables
     var pen_incorrectTouches = 0
     var pen_correctTouches = 0
+    var firstFeedTracked = false
+    var totalTouches = 0
     
+    //Audio Tracking Variables
     var instructionsComplete:Bool = false
     var feedbackComplete:Bool = true
     
+    //Scene Completion Variable
     var sceneOver = false
     
     override func didMove(to view: SKView) {
@@ -105,9 +114,16 @@ class PenScene: SKScene {
             if (self.atPoint(touchLocation).name == "cookie"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                pen_incorrectTouches += 1
             } else if (self.atPoint(touchLocation).name == "pen"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_twoItemCorrectFT += 1
+                    monster_correctFirstTries["penScene"] = true
+                    pen_correctTouches += 1
+                }
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -132,13 +148,18 @@ class PenScene: SKScene {
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
                     if (selectedNode?.name == "pen"){
-                        pen_correctTouches += 1
-                        monster_numCorrectPerScene["penScene"]! += 1
-                        if (pen_incorrectTouches == 0){
-                            monster_totalCorrectFT += 1
-                            monster_twoItemCorrectFT += 1
-                            monster_correctFirstTries["penScene"] = true
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["candyScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_twoItemCorrectFF += 1
+                            firstFeedTracked = true
                         }
+                        monster_numCorrectPerScene["penScene"]! += 1
+//                        if (pen_incorrectTouches == 0){
+//                            monster_totalCorrectFT += 1
+//                            monster_twoItemCorrectFT += 1
+//                            monster_correctFirstTries["penScene"] = true
+//                        }
 
                         selectedNode?.removeFromParent()
                         sceneOver = true
@@ -147,7 +168,8 @@ class PenScene: SKScene {
                     }else{
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
-                        foodNode1?.position = node1Position!
+                        firstFeedTracked = true
+                        selectedNode?.position = node1Position!
                         pen_incorrectTouches += 1
                         monster_numIncorrectPerScene["penScene"]! += 1
                         if pen_incorrectTouches > 15{
@@ -160,6 +182,7 @@ class PenScene: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = pen_correctTouches + pen_incorrectTouches
     }
 }
 

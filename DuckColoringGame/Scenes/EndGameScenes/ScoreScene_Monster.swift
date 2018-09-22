@@ -53,11 +53,11 @@ class ScoreScene_Monster: SKScene {
         printLabel(scene: self, label: setSize2Label, words: setSize2String, xCoord: 136, yCoord: -14.482, fontSize: 28)
         
         // PLACE 3-ITEM-CORRECT-FT LABEL
-        let setSize3String = "\(threeItemCorrectFT) / 6"
+        let setSize3String = "\(monster_threeItemCorrectFT) / 6"
         printLabel(scene: self, label: setSize3Label, words: setSize3String, xCoord: 136, yCoord: -48.659, fontSize: 28)
         
         // PLACE 4-ITEM-CORRECT-FT LABEL
-        let setSize4String = "\(fourItemCorrectFT) / 6"
+        let setSize4String = "\(monster_fourItemCorrectFT) / 6"
         printLabel(scene: self, label: setSize4Label, words: setSize4String, xCoord: 136, yCoord: -83.483, fontSize: 28)
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,7 +103,7 @@ class ScoreScene_Monster: SKScene {
 //                monster_twoItemCompleted += 1
 //            }
 //        }
-        monster_twoItemAccuracy = monster_twoItemAccuracy / monster_twoItemCompleted
+//        monster_twoItemAccuracy = monster_twoItemAccuracy / monster_twoItemCompleted
         let twoItemAccuracyText:String = "\(monster_twoItemCorrectFF) / 6"
 //        if monster_twoItemCompleted > 0 {
 //            twoItemAccuracyText = "\(Int(round(monster_twoItemAccuracy)))%"
@@ -113,37 +113,39 @@ class ScoreScene_Monster: SKScene {
         printLabel(scene: self, label: twoItemAccuracyLabel, words: twoItemAccuracyText, xCoord: -490, yCoord: -14.482, fontSize: 28)
         
         // CALCULATE AND PLACE 3-ITEM ACCURACY LABEL
-        let threeItemArray: [String] = ["cat", "lion", "cow", "trash", "toast", "hat"]
-        for item in threeItemArray {
-            if accuracyPerScene[item]! > 0.0 {
-                threeItemAccuracy += accuracyPerScene[item]!
-                threeItemCompleted += 1
-            }
-        }
-        threeItemAccuracy = threeItemAccuracy / threeItemCompleted
-        var threeItemAccuracyText:String
-        if threeItemCompleted > 0 {
-            threeItemAccuracyText = "\(Int(round(threeItemAccuracy)))%"
-        } else {
-            threeItemAccuracyText = "none completed"
-        }
+//        let threeItemArray: [String] = ["cat", "lion", "cow", "trash", "toast", "hat"]
+//        for item in threeItemArray {
+//            if accuracyPerScene[item]! > 0.0 {
+//                threeItemAccuracy += accuracyPerScene[item]!
+//                threeItemCompleted += 1
+//            }
+//        }
+//        threeItemAccuracy = threeItemAccuracy / threeItemCompleted
+//        var threeItemAccuracyText:String
+//        if threeItemCompleted > 0 {
+//            threeItemAccuracyText = "\(Int(round(threeItemAccuracy)))%"
+//        } else {
+//            threeItemAccuracyText = "none completed"
+//        }
+        let threeItemAccuracyText:String = "\(monster_threeItemCorrectFF) / 6"
         printLabel(scene: self, label: threeItemAccuracyLabel, words: threeItemAccuracyText, xCoord: -490, yCoord: -48.659, fontSize: 28)
         
         // CALCULATE AND PLACE 4-ITEM ACCURACY LABEL
-        let fourItemArray: [String] = ["hand", "rain", "airplane", "shoes", "cookie", "mouse"]
-        for item in fourItemArray {
-            if accuracyPerScene[item]! > 0.0 {
-                fourItemAccuracy += accuracyPerScene[item]!
-                fourItemCompleted += 1
-            }
-        }
-        fourItemAccuracy = fourItemAccuracy / fourItemCompleted
-        var fourItemAccuracyText:String
-        if fourItemCompleted > 0 {
-            fourItemAccuracyText = "\(Int(round(fourItemAccuracy)))%"
-        } else {
-            fourItemAccuracyText = "none completed"
-        }
+//        let fourItemArray: [String] = ["hand", "rain", "airplane", "shoes", "cookie", "mouse"]
+//        for item in fourItemArray {
+//            if accuracyPerScene[item]! > 0.0 {
+//                fourItemAccuracy += accuracyPerScene[item]!
+//                fourItemCompleted += 1
+//            }
+//        }
+//        fourItemAccuracy = fourItemAccuracy / fourItemCompleted
+//        var fourItemAccuracyText:String
+//        if fourItemCompleted > 0 {
+//            fourItemAccuracyText = "\(Int(round(fourItemAccuracy)))%"
+//        } else {
+//            fourItemAccuracyText = "none completed"
+//        }
+        let fourItemAccuracyText:String = "\(monster_fourItemCorrectFF) / 6"
         printLabel(scene: self, label: fourItemAccuracyLabel, words: fourItemAccuracyText, xCoord: -490, yCoord: -83.483, fontSize: 28)
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////

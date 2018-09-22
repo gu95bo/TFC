@@ -171,7 +171,7 @@ class ToothScene: SKScene {
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
                         firstFeedTracked = true
-                        foodNode2?.position = node2Position!
+                        selectedNode?.position = node2Position!
                         tooth_incorrectTouches += 1
                         monster_numIncorrectPerScene["toothScene"]! += 1
                         if tooth_incorrectTouches > 15{

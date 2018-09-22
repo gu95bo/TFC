@@ -14,23 +14,32 @@ class BalloonScene_Monster: SKScene {
     var gameTimer: Timer!
     var gameCounter = 0
     
+    //Variables for food and monster nodes
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var foodNode3:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     private var node3Position:CGPoint?
     
+    //Variables for node dragging and tracking
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
+    //Score tracking Variables
     var balloon_incorrectTouches = 0
     var balloon_correctTouches = 0
+    var firstFeedTracked = false
+    var totalTouches = 0
     
+    //Audio Tracking Variables
     var instructionsComplete:Bool = false
     var feedbackComplete:Bool = true
     
+    //Scene Completion Variable
     var sceneOver = false
     
     override func didMove(to view: SKView) {
@@ -111,12 +120,20 @@ class BalloonScene_Monster: SKScene {
             if (self.atPoint(touchLocation).name == "goose"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                balloon_incorrectTouches += 1
             } else if (self.atPoint(touchLocation).name == "beads"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                balloon_incorrectTouches += 1
             }else if (self.atPoint(touchLocation).name == "balloon"){
                 selectedNode = foodNode3
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_threeItemCorrectFT += 1
+                    monster_correctFirstTries["balloonScene"] = true
+                    balloon_correctTouches += 1
+                }
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -141,7 +158,13 @@ class BalloonScene_Monster: SKScene {
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
                     if (selectedNode?.name == "balloon"){
-                        balloon_correctTouches += 1
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["balloonScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_threeItemCorrectFF += 1
+                            firstFeedTracked = true
+                        }
+                        monster_numCorrectPerScene["balloonScene"]! += 1
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Munching")
@@ -155,6 +178,7 @@ class BalloonScene_Monster: SKScene {
                             foodNode2?.position = node2Position!
                         }
                         balloon_incorrectTouches += 1
+                        monster_numIncorrectPerScene["tomatoScene"]! += 1
                         if balloon_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "StarScene")
@@ -165,5 +189,6 @@ class BalloonScene_Monster: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = balloon_correctTouches + balloon_incorrectTouches
     }
 }

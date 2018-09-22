@@ -14,26 +14,35 @@ class DishScene: SKScene {
     var gameTimer: Timer!
     var gameCounter = 0
     
+    //Variables for food and monster nodes
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var foodNode3:SKNode?
     private var foodNode4:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     private var node3Position:CGPoint?
     private var node4Position:CGPoint?
     
+    //Variables for node dragging and tracking
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
-    private var dish_incorrectTouches = 0
-    private var dish_correctTouches = 0
+    //Score tracking Variables
+    var car_incorrectTouches = 0
+    var car_correctTouches = 0
+    var firstFeedTracked = false
+    var totalTouches = 0
     
-    private var instructionsComplete:Bool = false
-    private var feedbackComplete:Bool = true
+    //Audio Tracking Variables
+    var instructionsComplete:Bool = false
+    var feedbackComplete:Bool = true
     
-    private var sceneOver = false
+    //Scene Completion Variable
+    var sceneOver = false
     
     override func didMove(to view: SKView) {
         foodNode1 = self.childNode(withName: "car")
@@ -115,15 +124,24 @@ class DishScene: SKScene {
             if (self.atPoint(touchLocation).name == "car"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_fourItemCorrectFT += 1
+                    monster_correctFirstTries["carScene"] = true
+                    car_correctTouches += 1
+                }
             } else if (self.atPoint(touchLocation).name == "swing"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                car_incorrectTouches += 1
             }else if (self.atPoint(touchLocation).name == "crib"){
                 selectedNode = foodNode3
                 nodeIsSelected = true
+                car_incorrectTouches += 1
             }else if (self.atPoint(touchLocation).name == "motorcycle"){
                 selectedNode = foodNode4
                 nodeIsSelected = true
+                car_incorrectTouches += 1
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -148,7 +166,13 @@ class DishScene: SKScene {
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
                     if (selectedNode?.name == "car"){
-                        dish_correctTouches += 1
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["carScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_fourItemCorrectFF += 1
+                            firstFeedTracked = true
+                        }
+                        monster_numCorrectPerScene["carScene"]! += 1
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
@@ -163,8 +187,9 @@ class DishScene: SKScene {
                         }else{
                             foodNode4?.position = node4Position!
                         }
-                        dish_incorrectTouches += 1
-                        if dish_incorrectTouches > 15{
+                        car_incorrectTouches += 1
+                        monster_numIncorrectPerScene["carScene"]! += 1
+                        if car_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "ClockScene")
                         }
@@ -174,5 +199,6 @@ class DishScene: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = car_correctTouches + car_incorrectTouches
     }
 }

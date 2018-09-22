@@ -14,26 +14,35 @@ class ClockScene: SKScene {
     var gameTimer: Timer!
     var gameCounter = 0
     
+    //Variables for food and monster nodes
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var foodNode3:SKNode?
     private var foodNode4:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     private var node3Position:CGPoint?
     private var node4Position:CGPoint?
     
+    //Variables for node dragging and tracking
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
-    private var clock_incorrectTouches = 0
-    private var clock_correctTouches = 0
+    //Score tracking Variables
+    var clock_incorrectTouches = 0
+    var clock_correctTouches = 0
+    var firstFeedTracked = false
+    var totalTouches = 0
     
-    private var instructionsComplete:Bool = false
-    private var feedbackComplete:Bool = true
+    //Audio Tracking Variables
+    var instructionsComplete:Bool = false
+    var feedbackComplete:Bool = true
     
-    private var sceneOver = false
+    //Scene Completion Variable
+    var sceneOver = false
     
     override func didMove(to view: SKView) {
         foodNode1 = self.childNode(withName: "jacket")
@@ -115,15 +124,24 @@ class ClockScene: SKScene {
             if (self.atPoint(touchLocation).name == "jacket"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                clock_incorrectTouches += 1
             } else if (self.atPoint(touchLocation).name == "duck"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                clock_incorrectTouches += 1
             }else if (self.atPoint(touchLocation).name == "clock"){
                 selectedNode = foodNode3
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_fourItemCorrectFT += 1
+                    monster_correctFirstTries["clockScene"] = true
+                    clock_correctTouches += 1
+                }
             }else if (self.atPoint(touchLocation).name == "coffee"){
                 selectedNode = foodNode4
                 nodeIsSelected = true
+                clock_incorrectTouches += 1
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -149,7 +167,13 @@ class ClockScene: SKScene {
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
                     if (selectedNode?.name == "clock"){
-                        clock_correctTouches += 1
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["clockScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_fourItemCorrectFF += 1
+                            firstFeedTracked = true
+                        }
+                        monster_numCorrectPerScene["clockScene"]! += 1
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Biting")
@@ -165,6 +189,8 @@ class ClockScene: SKScene {
                         }else{
                             foodNode4?.position = node4Position!
                         }
+                        clock_incorrectTouches += 1
+                        monster_numIncorrectPerScene["clockScene"]! += 1
                         if clock_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "ScoreScene_Monster")
@@ -175,5 +201,6 @@ class ClockScene: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = clock_correctTouches + clock_incorrectTouches
     }
 }

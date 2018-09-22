@@ -69,11 +69,27 @@ var monster_twoItemAccuracy = 0.0
 var monster_threeItemAccuracy = 0.0
 var monster_fourItemAccuracy = 0.0
 
-var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "orangeScene": false, "toothScene": false, "flowerScene": false, "cupScene": false, "penScene": false]
-var monster_correctFirstFeed: [String:Bool] = ["candyScene": false, "orangeScene": false, "toothScene": false, "flowerScene": false, "cupScene": false, "penScene": false]
-var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
-var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
-var monster_accuracyPerScene: [String:Double] = ["candyScene": 0, "orangeScene":0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0]
+var monster_correctFirstTries: [String:Bool] = ["candyScene": false, "orangeScene": false, "toothScene": false, "flowerScene": false, "cupScene": false,
+                                                "penScene": false, "tomatoScene": false, "cakeScene": false, "balloonScene": false, "starScene": false,
+                                                "chairScene": false, "phoneScene": false, "appleScene": false, "cheeseScene": false, "pennyScene": false,
+                                                "moonScene": false, "carScene": false, "clockScene": false]
+
+var monster_correctFirstFeed: [String:Bool] = ["candyScene": false, "orangeScene": false, "toothScene": false, "flowerScene": false, "cupScene": false,
+                                               "penScene": false, "tomatoScene": false, "cakeScene": false, "balloonScene": false, "starScene": false,
+                                               "chairScene": false, "phoneScene": false, "appleScene": false, "cheeseScene": false, "pennyScene": false,
+                                               "moonScene": false, "carScene": false, "clockScene": false]
+
+var monster_numCorrectPerScene: [String:Int] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0,
+                                                "tomatoScene": 0,"cakeScene": 0, "balloonScene": 0, "starScene": 0, "chairScene": 0, "phoneScene": 0,
+                                                "appleScene": 0, "cheeseScene": 0, "pennyScene": 0, "moonScene": 0, "carScene": 0, "clockScene": 0]
+
+var monster_numIncorrectPerScene: [String:Int] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0,
+                                                  "tomatoScene": 0,"cakeScene": 0, "balloonScene": 0, "starScene": 0, "chairScene": 0, "phoneScene": 0,
+                                                  "appleScene": 0, "cheeseScene": 0, "pennyScece": 0, "moonScene": 0, "carScene": 0, "clockScene": 0]
+
+var monster_accuracyPerScene: [String:Double] = ["candyScene": 0, "orangeScene": 0, "toothScene": 0, "flowerScene": 0, "cupScene": 0, "penScene": 0,
+                                                 "tomatoScene": 0,"cakeScene": 0, "balloonScene": 0, "starScene": 0, "chairScene": 0, "phoneScene": 0,
+                                                 "appleScene": 0, "cheeseScene": 0, "pennyScene": 0, "moonScene": 0, "carScene": 0, "clockScene": 0]
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////

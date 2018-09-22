@@ -14,26 +14,35 @@ class AppleScene: SKScene {
     var gameTimer: Timer!
     var gameCounter = 0
     
+    //Variables for food and monster nodes
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var foodNode3:SKNode?
     private var foodNode4:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     private var node3Position:CGPoint?
     private var node4Position:CGPoint?
     
+    //Variables for node dragging and tracking
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
-    private var apple_incorrectTouches = 0
-    private var apple_correctTouches = 0
+    //Score tracking Variables
+    var apple_incorrectTouches = 0
+    var apple_correctTouches = 0
+    var firstFeedTracked = false
+    var totalTouches = 0
     
-    private var instructionsComplete:Bool = false
-    private var feedbackComplete:Bool = true
+    //Audio Tracking Variables
+    var instructionsComplete:Bool = false
+    var feedbackComplete:Bool = true
     
-    private var sceneOver = false
+    //Scene Completion Variable
+    var sceneOver = false
     
     override func didMove(to view: SKView) {
         foodNode1 = self.childNode(withName: "toast")
@@ -115,15 +124,24 @@ class AppleScene: SKScene {
             if (self.atPoint(touchLocation).name == "toast"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                apple_incorrectTouches += 1
             } else if (self.atPoint(touchLocation).name == "apple"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_fourItemCorrectFT += 1
+                    monster_correctFirstTries["appleScene"] = true
+                    apple_correctTouches += 1
+                }
             }else if (self.atPoint(touchLocation).name == "ice cream"){
                 selectedNode = foodNode3
                 nodeIsSelected = true
+                apple_incorrectTouches += 1
             }else if (self.atPoint(touchLocation).name == "fish"){
                 selectedNode = foodNode4
                 nodeIsSelected = true
+                apple_incorrectTouches += 1
             }else{
                 selectedNode = nil
                 nodeIsSelected = false
@@ -147,7 +165,13 @@ class AppleScene: SKScene {
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
                     if (selectedNode?.name == "apple"){
-                        apple_correctTouches += 1
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["appleScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_fourItemCorrectFF += 1
+                            firstFeedTracked = true
+                        }
+                        monster_numCorrectPerScene["appleScene"]! += 1
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Chewing")
@@ -163,6 +187,7 @@ class AppleScene: SKScene {
                             foodNode4?.position = node4Position!
                         }
                         apple_incorrectTouches += 1
+                        monster_numIncorrectPerScene["appleScene"]! += 1
                         if apple_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "ButterScene")
@@ -173,6 +198,7 @@ class AppleScene: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = apple_correctTouches + apple_incorrectTouches
     }
 }
 

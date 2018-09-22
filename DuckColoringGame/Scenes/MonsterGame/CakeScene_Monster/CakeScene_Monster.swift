@@ -13,25 +13,33 @@ class CakeScene_Monster: SKScene {
     //Timer Variables
     var gameTimer: Timer!
     var gameCounter = 0
-
+    
+    //Variables for food and monster nodes
     private var foodNode1:SKNode?
     private var foodNode2:SKNode?
     private var foodNode3:SKNode?
     private var monsterNode:SKNode?
+    
+    //Variables for position reset
     private var node1Position:CGPoint?
     private var node2Position:CGPoint?
     private var node3Position:CGPoint?
-
     
+    //Variables for node dragging and tracking
     private var selectedNode:SKNode?
     private var nodeIsSelected:Bool?
     
+    //Score tracking Variables
     var cake_incorrectTouches = 0
     var cake_correctTouches = 0
+    var firstFeedTracked = false
+    var totalTouches = 0
     
+    //Audio Tracking Variables
     var instructionsComplete:Bool = false
     var feedbackComplete:Bool = true
     
+    //Scene Completion Variable
     var sceneOver = false
     
     override func didMove(to view: SKView) {
@@ -112,12 +120,20 @@ class CakeScene_Monster: SKScene {
             if (self.atPoint(touchLocation).name == "tree"){
                 selectedNode = foodNode1
                 nodeIsSelected = true
+                cake_incorrectTouches += 1
             } else if (self.atPoint(touchLocation).name == "cake"){
                 selectedNode = foodNode2
                 nodeIsSelected = true
+                if (totalTouches == 0){
+                    monster_totalCorrectFT += 1
+                    monster_threeItemCorrectFT += 1
+                    monster_correctFirstTries["cakeScene"] = true
+                    cake_correctTouches += 1
+                }
             }else if (self.atPoint(touchLocation).name == "umbrella"){
                 selectedNode = foodNode3
                 nodeIsSelected = true
+                cake_incorrectTouches += 1
             }else{
                 playFeedbackWithName(audioName: "wrong")
                 selectedNode = nil
@@ -142,7 +158,13 @@ class CakeScene_Monster: SKScene {
             for items in self.nodes(at: touchLocation){
                 if items.name == "Monster"{
                     if (selectedNode?.name == "cake"){
-                        cake_correctTouches += 1
+                        if (firstFeedTracked == false){
+                            monster_correctFirstFeed["cakeScene"] = true
+                            monster_totalCorrectFF += 1
+                            monster_threeItemCorrectFF += 1
+                            firstFeedTracked = true
+                        }
+                        monster_numCorrectPerScene["cakeScene"]! += 1
                         selectedNode?.removeFromParent()
                         sceneOver = true
                         animateMonster(withAudio: "Sound_Chewing")
@@ -156,6 +178,7 @@ class CakeScene_Monster: SKScene {
                             foodNode3?.position = node3Position!
                         }
                         cake_incorrectTouches += 1
+                        monster_numIncorrectPerScene["cakeScene"]! += 1
                         if cake_incorrectTouches > 15{
                             sceneOver = true
                             nextScene(sceneName: "BalloonScene_Monster")
@@ -166,5 +189,6 @@ class CakeScene_Monster: SKScene {
             selectedNode = nil
             nodeIsSelected = false
         }
+        totalTouches = cake_correctTouches + cake_incorrectTouches
     }
 }

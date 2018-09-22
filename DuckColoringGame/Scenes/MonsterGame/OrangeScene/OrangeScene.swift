@@ -172,7 +172,7 @@ class OrangeScene: SKScene {
                         playFeedbackWithName(audioName: "wrong")
                         animateMonster_incorrect()
                         firstFeedTracked = true
-                        foodNode1?.position = node1Position!
+                        selectedNode?.position = node1Position!
                         orange_incorrectTouches += 1
                         monster_numIncorrectPerScene["orangeScene"]! += 1
                         if orange_incorrectTouches > 15{
